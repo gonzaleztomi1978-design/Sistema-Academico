@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primario: #1e3a5f;
+  --color-primario-claro: #2e5a8f;
+  --color-acento: #e8b04b;
+  --color-fondo: #f4f6f9;
+  --color-texto: #22303e;
+  --color-borde: #d7dee7;
+  --color-error: #b3261e;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ===== Login ===== */
+.login-fondo {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-primario-claro) 100%);
+  padding: 1rem;
+}
+
+.login-tarjeta {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.login-instituto {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primario-claro);
+  margin-bottom: 0.25rem;
+}
+
+.login-tarjeta h1 {
+  font-size: 1.6rem;
+  color: var(--color-primario);
+}
+
+.login-subtitulo {
+  color: #6b7885;
+  font-size: 0.9rem;
+  margin: 0.5rem 0 1.5rem;
+}
+
+.login-tarjeta label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.login-tarjeta input {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--color-borde);
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.login-tarjeta input:focus {
+  outline: 2px solid var(--color-primario-claro);
+  border-color: transparent;
+}
+
+.login-error {
+  background: #fdecea;
+  color: var(--color-error);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.login-tarjeta button {
+  background: var(--color-primario);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.login-tarjeta button:hover:not(:disabled) {
+  background: var(--color-primario-claro);
+}
+
+.login-tarjeta button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+/* ===== Panel de inicio ===== */
+.inicio-encabezado {
+  background: var(--color-primario);
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.inicio-instituto {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+}
+
+.inicio-encabezado h1 {
+  font-size: 1.3rem;
+}
+
+.inicio-usuario {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.inicio-usuario button {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+}
+
+.inicio-usuario button:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.inicio-contenido {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.inicio-contenido h2 {
+  font-size: 1.1rem;
+  margin-bottom: 1.25rem;
+  color: var(--color-primario);
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.tarjeta {
+  background: #fff;
+  border: 1px solid var(--color-borde);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tarjeta-equipo {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primario-claro);
+}
+
+.tarjeta h3 {
+  font-size: 1.05rem;
+  color: var(--color-texto);
+}
+
+.tarjeta p {
+  font-size: 0.88rem;
+  color: #5a6773;
+  flex: 1;
+}
+
+.tarjeta-pendiente {
+  align-self: flex-start;
+  background: #fdf3dd;
+  color: #8a6116;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}

@@ -1,0 +1,21 @@
+# ===== .NET =====
+backend/**/bin/
+backend/**/obj/
+*.user
+.vs/
+*.suo
+
+# ===== Node / React =====
+frontend/node_modules/
+frontend/dist/
+npm-debug.log*
+
+# ===== Configuración local (no subir claves ni conexiones propias) =====
+**/appsettings.Local.json
+.env
+.env.local
+
+# ===== Sistema operativo / editores =====
+.DS_Store
+Thumbs.db
+.idea/

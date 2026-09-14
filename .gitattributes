@@ -1,0 +1,53 @@
+# Normalización de fines de línea.
+# Sin esto, un archivo tocado en dos máquinas distintas (Windows con CRLF, Linux/Mac con LF)
+# aparece como "cambiado entero" y genera conflictos falsos en cada merge hacia development.
+#
+# Cómo funciona: en el repositorio todo se guarda con LF. Al hacer checkout, cada máquina
+# recibe el formato nativo de su sistema (CRLF en Windows, LF en Linux y Mac).
+
+# Por defecto: Git detecta si es texto y lo normaliza.
+* text=auto
+
+# ===== Código fuente y configuración: texto, normalizado =====
+*.cs        text diff=csharp
+*.csproj    text
+*.js        text
+*.jsx       text
+*.ts        text
+*.tsx       text
+*.css       text
+*.html      text
+*.json      text
+*.md        text
+*.yml       text
+*.yaml      text
+*.xml       text
+*.config    text
+*.svg       text
+.gitignore      text
+.gitattributes  text
+
+# ===== Archivos que exigen un fin de línea fijo =====
+*.sln       text eol=crlf
+*.sh        text eol=lf
+*.ps1       text eol=crlf
+*.cmd       text eol=crlf
+*.bat       text eol=crlf
+
+# ===== Binarios: que Git no los toque nunca =====
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+*.pdf       binary
+*.zip       binary
+*.dll       binary
+*.exe       binary
+*.pfx       binary
+*.snk       binary
+
+# ===== Archivos generados: GitHub los colapsa en el diff de los PR =====
+frontend/package-lock.json                                                        linguist-generated=true
+backend/SistemaAcademico.Infrastructure/Migrations/*.Designer.cs                  linguist-generated=true
+backend/SistemaAcademico.Infrastructure/Migrations/AppDbContextModelSnapshot.cs   linguist-generated=true

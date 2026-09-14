@@ -1,0 +1,61 @@
+# CODEOWNERS — Sistema Académico
+#
+# Este archivo dice quién tiene que revisar cada parte del repositorio.
+# GitHub lee la última regla que coincide con el archivo tocado y pide review a ese dueño.
+#
+# Dueño actual: @gonzaleztomi1978-design (E1, integrador). Si otros integrantes del E1 también
+# tienen que revisar, agregá sus usuarios en la misma línea separados por espacio, por ejemplo:
+#   *    @gonzaleztomi1978-design @otro-usuario-del-e1
+# Todo cambio a este archivo entra por PR, como cualquier otro.
+#
+# Ojo: CODEOWNERS por sí solo no bloquea nada. Solo pide revisión automática si la rama de destino
+# tiene activada la opción "Require review from Code Owners" en Settings > Branches > Branch
+# protection rules. Conviene activarla en development, testing y production.
+#
+# Segundo detalle que confunde: GitHub lee este archivo desde la RAMA DE DESTINO del PR (la base),
+# no desde la rama que abre el PR. O sea que empieza a funcionar en los PR hacia development recién
+# cuando el E1 mergea el primer PR que lo trae, y en testing y production cuando llega hasta ahí.
+#
+# El dueño tiene que tener permiso de escritura sobre el repositorio, si no GitHub lo ignora
+# (te lo avisa mostrando el archivo con un error de "unknown owner" en GitHub).
+#
+# Sintaxis: <patrón de archivos>  <dueño>
+
+# ---------------------------------------------------------------------------
+# Dueño por defecto: todo el repositorio lo revisa el E1 (Acceso e Integración)
+# ---------------------------------------------------------------------------
+*                                                       @gonzaleztomi1978-design
+
+# ---------------------------------------------------------------------------
+# Configuración del repositorio y documentación transversal
+# ---------------------------------------------------------------------------
+/.github/                                               @gonzaleztomi1978-design
+/docs/                                                  @gonzaleztomi1978-design
+/README.md                                              @gonzaleztomi1978-design
+/.gitignore                                             @gonzaleztomi1978-design
+/.gitattributes                                         @gonzaleztomi1978-design
+
+# ---------------------------------------------------------------------------
+# Backend — arranque, configuración y acceso a datos
+# Tocar esto afecta a los cuatro equipos, por eso lo revisa el E1.
+# ---------------------------------------------------------------------------
+/backend/SistemaAcademico.Api/Program.cs                @gonzaleztomi1978-design
+/backend/SistemaAcademico.Api/appsettings*.json         @gonzaleztomi1978-design
+/backend/SistemaAcademico.Infrastructure/Data/          @gonzaleztomi1978-design
+/backend/SistemaAcademico.Infrastructure/Migrations/    @gonzaleztomi1978-design
+
+# ---------------------------------------------------------------------------
+# Backend — entidades de autenticación y permisos (no se tocan sin acordarlo)
+# ---------------------------------------------------------------------------
+/backend/SistemaAcademico.Domain/Entidades/Usuario.cs      @gonzaleztomi1978-design
+/backend/SistemaAcademico.Domain/Entidades/Rol.cs          @gonzaleztomi1978-design
+/backend/SistemaAcademico.Domain/Entidades/Permiso.cs      @gonzaleztomi1978-design
+/backend/SistemaAcademico.Domain/Entidades/RolPermiso.cs   @gonzaleztomi1978-design
+
+# ---------------------------------------------------------------------------
+# Frontend — piezas compartidas: cliente de API, ruteo y guardia de rutas
+# Cada equipo es dueño de sus pantallas en frontend/src/paginas, pero esto es de todos.
+# ---------------------------------------------------------------------------
+/frontend/src/api.js                                    @gonzaleztomi1978-design
+/frontend/src/App.jsx                                   @gonzaleztomi1978-design
+/frontend/src/componentes/RutaProtegida.jsx             @gonzaleztomi1978-design

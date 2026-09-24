@@ -1,0 +1,10 @@
+.nav-item {
+  text-decoration: none;
+}
+
+.nav-item:focus-visible,
+.icon-button:focus-visible,
+.close:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}

@@ -1,9 +1,9 @@
 # Workflow de integración continua del Sistema Académico.
-# Verifica que el backend (.NET) y el frontend (React + Vite) compilen antes de mergear.
+# Verifica que el proyecto instale, pase los tests y compile antes de mergear.
 #
 # Ojo con algo que confunde la primera vez: GitHub lee este archivo desde la rama involucrada.
 # Para que corra en los PR hacia development, el archivo tiene que estar también en development;
-# llega solo cuando el E1 mergea el primer PR que lo incluye (e1 -> development -> testing -> production).
+# llega solo cuando el E1 mergea el primer PR que lo incluye.
 name: CI
 
 # Cuándo se ejecuta este workflow.
@@ -30,65 +30,43 @@ on:
   # Permite ejecutarlo a mano desde la pestaña Actions (le sirve al E1 antes de promover).
   workflow_dispatch:
 
-# Permisos mínimos: el workflow solo necesita leer el código del repo.
+# Permisos mínimos: el workflow solo necesita leer el código del repositorio.
 permissions:
   contents: read
 
 jobs:
-  # Job 1: compila la solución del backend.
-  backend:
-    name: Compilar backend (.NET 9)
-    # Máquina virtual Linux provista por GitHub; alcanza porque solo compilamos, no corremos la app.
+  build:
+    name: Compilar el proyecto (React + Vite)
+    # Máquina virtual Linux provista por GitHub.
     runs-on: ubuntu-latest
     steps:
       # Descarga el código del repositorio dentro de la máquina virtual.
       - name: Checkout del repositorio
         uses: actions/checkout@v4
 
-      # Instala el SDK de .NET 9, el mismo que usamos localmente.
-      - name: Instalar .NET SDK 9
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '9.0.x'
-
-      # Baja los paquetes NuGet de los 4 proyectos de la solución.
-      - name: Restaurar dependencias
-        run: dotnet restore backend/SistemaAcademico.sln
-
-      # Compila en Release; --no-restore evita repetir el paso anterior.
-      - name: Compilar la solución
-        run: dotnet build backend/SistemaAcademico.sln --configuration Release --no-restore
-
-  # Job 2: compila el frontend. Corre en paralelo al job backend, son independientes.
-  frontend:
-    name: Compilar frontend (React + Vite)
-    runs-on: ubuntu-latest
-    steps:
-      # Descarga el código del repositorio dentro de la máquina virtual.
-      - name: Checkout del repositorio
-        uses: actions/checkout@v4
-
-      # Instala Node 20 y cachea los paquetes npm según el package-lock.json del frontend.
+      # Instala Node 20 y cachea los paquetes npm según el package-lock.json.
       - name: Instalar Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: npm
-          cache-dependency-path: frontend/package-lock.json
 
       # Instala las dependencias exactas del package-lock.json (npm ci, no npm install).
       - name: Instalar dependencias
-        working-directory: frontend
         run: npm ci
 
-      # Pasa oxlint solo para avisar: si encuentra algo, lo marca pero NO tumba el CI.
-      # Es a propósito: un aviso de estilo no tiene que frenarle el PR a un equipo. Igual, mirá el aviso y arreglalo.
+      # Pasa ESLint solo para avisar: si encuentra algo lo marca, pero NO tumba el CI.
+      # Es a propósito: un aviso de estilo no tiene que frenarle el PR a un equipo.
+      # Igual, miralo y arreglalo.
       - name: Lint (informativo, no bloquea)
-        working-directory: frontend
         run: npm run lint
         continue-on-error: true
 
-      # Compila el frontend con Vite; si esto falla, el PR no se mergea.
-      - name: Compilar el frontend
-        working-directory: frontend
+      # Corre los tests con Vitest. El flag --passWithNoTests evita que falle mientras todavía
+      # no haya archivos de test; cuando los equipos escriban los suyos, corren solos.
+      - name: Tests
+        run: npx vitest run --passWithNoTests
+
+      # Compila el proyecto con Vite. Si esto falla, el PR no se mergea.
+      - name: Compilar
         run: npm run build

@@ -1,0 +1,137 @@
+/* Inscripciones del estudiante alineadas con la pantalla del Secretario. */
+.estudiante-dashboard {
+	min-height: auto;
+	padding: 0;
+	background: transparent;
+}
+
+.estudiante-dashboard .estudiante-header {
+	align-items: flex-start;
+	height: auto;
+	padding: 0;
+	margin-bottom: 24px;
+	background: transparent;
+	border: 0;
+}
+
+.estudiante-dashboard .estudiante-header--secretario {
+	margin-bottom: 18px;
+}
+
+.estudiante-dashboard .estudiante-header h1 {
+	font-size: 28px;
+}
+
+.estudiante-dashboard .student-plan-filter {
+	max-width: 1180px;
+	margin: 0 0 22px;
+}
+
+.estudiante-dashboard .student-plan-filter label {
+	display: flex;
+	min-width: 280px;
+	flex-direction: column;
+	gap: 7px;
+	color: var(--color-text);
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+}
+
+.estudiante-dashboard .student-plan-readonly {
+	display: flex;
+	align-items: center;
+	height: 42px;
+	padding: 0 12px;
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-sm);
+	background: var(--color-background);
+	color: var(--color-text);
+	font: 500 13px 'DM Sans', sans-serif;
+}
+
+.estudiante-dashboard .materias-heading h2 {
+	margin: 7px 0 5px;
+	font-size: 25px;
+}
+
+.estudiante-dashboard .materias-grid {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 17px;
+}
+
+.estudiante-dashboard .materia-inscripcion-card {
+	min-height: 270px;
+	border-radius: 11px;
+	box-shadow: 0 5px 16px #183b3808;
+}
+
+.estudiante-dashboard .materia-inscripcion-card:hover {
+	border-color: #aac8b7;
+	box-shadow: 0 9px 24px #183b3814;
+}
+
+.estudiante-dashboard .materia-inscripcion-button {
+	border-color: #c9dcca;
+	background: #f4f8f1;
+	color: var(--icgb-deep);
+}
+
+.estudiante-dashboard .materia-inscripcion-button:not(:disabled):hover {
+	border-color: var(--icgb-mid);
+	background: #e4eee1;
+}
+
+@media (max-width: 1050px) {
+	.estudiante-dashboard .materias-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 720px) {
+	.estudiante-dashboard .estudiante-header {
+		flex-direction: column;
+	}
+
+	.estudiante-dashboard .estudiante-header h1 {
+		font-size: 22px;
+	}
+
+	.estudiante-dashboard .materias-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Homepage del estudiante: reutiliza la composición visual del dashboard institucional. */
+.student-homepage .welcome,
+.student-homepage .stats,
+.student-homepage .dashboard-grid {
+	max-width: 1180px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.student-home-meta {
+	display: flex;
+	max-width: 1180px;
+	justify-content: space-between;
+	gap: 16px;
+	margin: -10px auto 24px;
+	color: var(--color-muted);
+	font-size: 12px;
+}
+
+.student-home-meta span {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+@media (max-width: 720px) {
+	.student-home-meta {
+		align-items: flex-start;
+		flex-direction: column;
+		margin-top: -12px;
+	}
+}
+.simulador-roles{position:fixed;top:12px;left:50%;z-index:10;display:flex;align-items:center;gap:14px;transform:translateX(-50%);padding:6px 8px 6px 12px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:#ffffffec;box-shadow:0 4px 14px #183b3814;color:var(--color-muted);font-size:11px;font-weight:700}.simulador-roles__buttons{display:flex;gap:4px}.simulador-roles button{border:0;border-radius:var(--radius-sm);padding:7px 11px;background:transparent;color:var(--color-muted);font:700 11px 'DM Sans',sans-serif;cursor:pointer}.simulador-roles button:hover,.simulador-roles button.activo{background:var(--color-primary);color:#fff}.estudiante-dashboard{min-height:auto;padding:0;background:transparent;color:var(--color-text)}.estudiante-nav{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto 48px;padding-bottom:18px;border-bottom:1px solid var(--color-border)}.estudiante-nav__brand,.estudiante-nav__active{display:flex;align-items:center;gap:9px}.estudiante-nav__brand{color:var(--color-primary-strong);font:700 16px 'Plus Jakarta Sans',sans-serif}.estudiante-nav__active{padding:9px 12px;border-radius:var(--radius-sm);background:var(--color-accent);color:var(--color-primary-strong);font-size:12px;font-weight:700}.estudiante-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;max-width:1180px;margin:0 auto 14px}.estudiante-eyebrow{color:var(--color-primary);font-size:10px;font-weight:700;letter-spacing:1.2px}.estudiante-header h1{margin:8px 0 5px;font:700 clamp(25px,4vw,36px) 'Plus Jakarta Sans',sans-serif;color:var(--color-text)}.estudiante-header p{margin:0;color:var(--color-muted);font-size:13px}.estudiante-plan{display:flex;align-items:center;gap:11px;min-width:270px;padding:14px 16px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface);box-shadow:var(--shadow-card);color:var(--color-primary)}.estudiante-plan span{display:grid;gap:4px}.estudiante-plan small{color:var(--color-muted);font-size:10px}.estudiante-plan strong{color:var(--color-text);font-size:12px}.estudiante-meta{display:flex;gap:18px;max-width:1180px;margin:0 auto 25px;color:var(--color-muted);font-size:11px}.estudiante-meta span{display:flex;align-items:center;gap:5px}.estudiante-periodo-cerrado,.estudiante-aviso{max-width:1180px;margin:0 auto 18px;padding:12px 15px;border:1px solid #e8cfa8;border-radius:var(--radius-sm);background:#fff7e8;color:#89652e;font-size:12px}.estudiante-aviso{display:flex;justify-content:space-between;border-color:#cfdfd0;background:#e8f0e7;color:#42665c}.estudiante-aviso button{border:0;background:transparent;color:inherit;font-size:18px;cursor:pointer}.materias-heading{display:flex;align-items:flex-end;justify-content:space-between;max-width:1180px;margin:0 auto 16px}.materias-heading h2{margin:7px 0 0;font:700 22px 'Plus Jakarta Sans',sans-serif}.materias-heading>span{color:var(--color-muted);font-size:12px}.materias-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:1180px;margin:0 auto}.materia-inscripcion-card{display:flex;min-height:220px;flex-direction:column;padding:18px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface);box-shadow:var(--shadow-card);transition:transform .2s ease,box-shadow .2s ease}.materia-inscripcion-card:not(.materia-inscripcion-card--bloqueada):hover{transform:translateY(-3px);box-shadow:0 9px 24px #183b3814}.materia-inscripcion-card--bloqueada{background:#f0f2ef;opacity:.74}.materia-inscripcion-card__header{display:flex;align-items:center;justify-content:space-between;gap:8px}.materia-inscripcion-card__year{color:var(--color-muted);font-size:10px;font-weight:700;text-transform:uppercase}.materia-inscripcion-card h2{margin:24px 0 10px;font:700 18px 'Plus Jakarta Sans',sans-serif}.materia-estado{display:flex;align-items:center;gap:4px;font-size:10px;font-weight:700}.materia-estado--a{color:var(--color-primary)}.materia-estado--r{color:#9a7636}.materia-estado--pendiente{color:var(--color-muted)}.materia-bloqueo{display:flex;align-items:flex-start;gap:6px;margin:0;color:#89652e;font-size:11px;line-height:1.4}.materia-inscripcion-button{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin-top:auto;padding:10px;border:1px solid #c9dcca;border-radius:var(--radius-sm);background:#f4f8f1;color:var(--color-primary-strong);font:700 12px 'DM Sans',sans-serif;cursor:pointer}.materia-inscripcion-button:disabled{border-color:#d5dad5;background:#e4e7e3;color:#7d8780;cursor:not-allowed}@media(max-width:850px){.estudiante-header{align-items:stretch;flex-direction:column}.estudiante-plan{min-width:0}.materias-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.simulador-roles{right:12px;left:auto;transform:none}.simulador-roles>span{display:none}.estudiante-dashboard{padding:70px 18px 32px}.estudiante-nav{margin-bottom:32px}.estudiante-meta{flex-direction:column;gap:7px}.materias-grid{grid-template-columns:1fr}.materia-inscripcion-card{min-height:200px}}

@@ -1,21 +1,28 @@
-# ===== .NET =====
-backend/**/bin/
-backend/**/obj/
-*.user
-.vs/
-*.suo
+# ===== Dependencias y build =====
+# Se generan solos con npm install y npm run build. No se versionan nunca.
+node_modules/
+dist/
+dist-ssr/
 
-# ===== Node / React =====
-frontend/node_modules/
-frontend/dist/
+# ===== Logs =====
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
 
-# ===== Configuración local (no subir claves ni conexiones propias) =====
-**/appsettings.Local.json
+# ===== Configuración local (no subir claves ni URLs propias) =====
 .env
 .env.local
+.env.*.local
 
-# ===== Sistema operativo / editores =====
+# ===== Cachés de herramientas =====
+.vite/
+coverage/
+.eslintcache
+
+# ===== Sistema operativo y editores =====
 .DS_Store
 Thumbs.db
 .idea/
+*.sw?

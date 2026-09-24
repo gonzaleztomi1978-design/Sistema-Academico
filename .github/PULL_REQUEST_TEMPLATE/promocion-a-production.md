@@ -37,12 +37,11 @@ Riesgos que siguen abiertos: <!-- ninguno / detallar -->
 
 ## Checklist de cierre
 
-- [ ] El workflow **CI** de GitHub Actions está en verde sobre `testing` y sobre este PR
-- [ ] `dotnet build` (en `backend/`) y `npm run build` (en `frontend/`) pasan sin errores
-- [ ] No hay archivos de configuración personal en el diff (connection strings propias, `.env`, `appsettings.Local.json`)
-- [ ] `README.md` está actualizado (usuarios de prueba, cómo levantar el proyecto, estrategia de ramas)
-- [ ] `docs/mesa-tecnica.md` está actualizado (entidades, contratos de API, decisiones tomadas)
-- [ ] La base se crea desde cero sin errores con el código de esta versión
+- [ ] El workflow **CI** está en verde sobre `testing` y sobre este PR
+- [ ] `npm run build` pasa sin errores
+- [ ] No hay archivos de configuración personal ni `node_modules/` en el diff
+- [ ] El `README.md` está actualizado
+- [ ] Los documentos de `documentos/` están actualizados
 - [ ] Después de mergear, se crea el tag `vX.Y.Z` sobre `production`
 
 El tag se crea **después** de mergear el PR, para que apunte al commit de merge.

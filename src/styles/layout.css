@@ -1,0 +1,16 @@
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+}
+
+main {
+  width: calc(100% - 258px);
+  margin-left: 258px;
+}
+
+@media (max-width: 720px) {
+  main {
+    width: 100%;
+    margin-left: 0;
+  }
+}

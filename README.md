@@ -6,6 +6,14 @@ El sistema tiene dos perfiles: **Secretario** y **Estudiante**.
 
 ---
 
+## Las 5 reglas que no se rompen
+
+1. **Nunca** pushear directo a `development`, `testing` ni `production`.
+2. **Nunca** subir `node_modules/` ni `dist/`. Se generan solos.
+3. **Nunca** usar `git push --force`. Le rompe el repositorio a todos.
+4. Antes de abrir un Pull Request, `npm run build` tiene que pasar sin errores.
+5. Los conflictos los resolvés **en tu rama**, en tu máquina. No con el botón de GitHub.
+
 ## Arrancar en 3 pasos
 
 ```bash
@@ -105,13 +113,7 @@ Guía completa, con los conflictos típicos y cómo salir de cada problema: [doc
 
 ---
 
-## Las 5 reglas que no se rompen
 
-1. **Nunca** pushear directo a `development`, `testing` ni `production`.
-2. **Nunca** subir `node_modules/` ni `dist/`. Se generan solos.
-3. **Nunca** usar `git push --force`. Le rompe el repositorio a todos.
-4. Antes de abrir un Pull Request, `npm run build` tiene que pasar sin errores.
-5. Los conflictos los resolvés **en tu rama**, en tu máquina. No con el botón de GitHub.
 
 ---
 
@@ -132,8 +134,5 @@ Guía completa, con los conflictos típicos y cómo salir de cada problema: [doc
 
 ---
 
-## Una aclaración sobre los datos
 
-Todavía **no hay backend**. Las pantallas funcionan con datos simulados en memoria, en `src/api/createMockRepository.js`. Cuando exista una API real se cambia solo esa capa, sin tocar las pantallas. Está explicado en [continuacion.md](documentos/continuacion.md).
 
-La base de código es la que armó la profesora en [ProfeKarinaSalto/SistemaAcademicoISGB](https://github.com/ProfeKarinaSalto/SistemaAcademicoISGB).

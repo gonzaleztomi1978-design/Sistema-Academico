@@ -81,6 +81,9 @@ CREATE TABLE dbo.Users (
     EmergencyContactPhone  NVARCHAR(20)      NULL,
     PasswordHash           NVARCHAR(255)     NOT NULL,
     IsActive               BIT               NOT NULL CONSTRAINT DF_Users_IsActive DEFAULT (1),
+    FailedLoginAttempts    INT               NOT NULL CONSTRAINT DF_Users_FailedLoginAttempts DEFAULT (0),
+    FailedLoginWindowStartedAt DATETIMEOFFSET NULL,
+    LockedUntil            DATETIMEOFFSET    NULL,
 
     CONSTRAINT PK_Users            PRIMARY KEY (Id),
     CONSTRAINT UQ_Users_Cuil       UNIQUE (Cuil),
@@ -90,6 +93,20 @@ CREATE TABLE dbo.Users (
     CONSTRAINT FK_Users_Roles      FOREIGN KEY (RoleId) REFERENCES dbo.Roles (Id),
     INDEX IX_Users_RoleId (RoleId)
 );
+GO
+
+/* Add lockout columns to existing databases without overwriting existing values. */
+IF COL_LENGTH(N'dbo.Users', N'FailedLoginAttempts') IS NULL
+    ALTER TABLE dbo.Users ADD FailedLoginAttempts INT NOT NULL
+        CONSTRAINT DF_Users_FailedLoginAttempts DEFAULT (0);
+GO
+
+IF COL_LENGTH(N'dbo.Users', N'FailedLoginWindowStartedAt') IS NULL
+    ALTER TABLE dbo.Users ADD FailedLoginWindowStartedAt DATETIMEOFFSET NULL;
+GO
+
+IF COL_LENGTH(N'dbo.Users', N'LockedUntil') IS NULL
+    ALTER TABLE dbo.Users ADD LockedUntil DATETIMEOFFSET NULL;
 GO
 
 /* =============================================================================
@@ -202,6 +219,27 @@ CREATE TABLE dbo.StudentSubjects (
     CONSTRAINT FK_StudentSubjects_Students  FOREIGN KEY (StudentId) REFERENCES dbo.Students (Id),
     CONSTRAINT FK_StudentSubjects_Subjects  FOREIGN KEY (SubjectId) REFERENCES dbo.Subjects (Id),
     INDEX IX_StudentSubjects_SubjectId (SubjectId)
+);
+GO
+
+IF OBJECT_ID(N'dbo.SubjectSchedules', N'U') IS NULL
+CREATE TABLE dbo.SubjectSchedules (
+    Id         INT IDENTITY(1,1) NOT NULL,
+    SubjectId  INT               NOT NULL,
+    Section    NVARCHAR(20)      NOT NULL,
+    Day        NVARCHAR(10)      NOT NULL,
+    StartTime  TIME(0)           NOT NULL,
+    EndTime    TIME(0)           NOT NULL,
+
+    CONSTRAINT PK_SubjectSchedules PRIMARY KEY (Id),
+    CONSTRAINT UQ_SubjectSchedules_SubjectSectionDayTime
+        UNIQUE (SubjectId, Section, Day, StartTime, EndTime),
+    CONSTRAINT CK_SubjectSchedules_Day
+        CHECK (Day IN (N'Monday', N'Tuesday', N'Wednesday', N'Thursday',
+                       N'Friday', N'Saturday', N'Sunday')),
+    CONSTRAINT CK_SubjectSchedules_TimeRange CHECK (StartTime < EndTime),
+    CONSTRAINT FK_SubjectSchedules_Subjects
+        FOREIGN KEY (SubjectId) REFERENCES dbo.Subjects (Id)
 );
 GO
 

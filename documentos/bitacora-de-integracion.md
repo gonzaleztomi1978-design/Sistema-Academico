@@ -13,7 +13,7 @@ Registro de todo lo que entró a `development`: qué trajo cada equipo, cómo se
    - combina las ramas de todos los equipos para encontrar conflictos antes de que lleguen a `development`.
 3. Lo que funciona se integra. Si algo falla, se le informa al equipo para que lo corrija en su rama: el E1 no corrige el código de otros equipos.
 
-## Estado al 18/11/2026
+## Estado al 19/11/2026
 
 Los cuatro equipos ya tienen su trabajo integrado en `development`.
 
@@ -21,7 +21,7 @@ Los cuatro equipos ya tienen su trabajo integrado en `development`.
 |---|---|---|
 | **E1** — Acceso e Integración | Login, cierre y vencimiento de sesión (con renovación automática), roles y permisos, menú según los permisos de la API, gestión de usuarios con el perfil de cada rol y auditoría de accesos. | Recuperación de contraseña (S2-7), cuando el sistema esté desplegado y haya servidor de correo. |
 | **E2** — Secretaría | Inscripción a 1.º año, ver y modificar estudiantes, comisiones con asignación automática, gestión de cupos, docentes con asignación de materias y horarios por comisión, con las pantallas conectadas a la API. | Hacer el resumen de inscripciones con menos pedidos a la API. |
-| **E3** — Gestión Académica | API y pantallas de planes de estudio y materias, correlatividades guardadas en la base con sus validaciones, y quitar materias de un plan. | Bajas de planes, cursos y el arreglo de `useSubmit`. |
+| **E3** — Gestión Académica | API y pantallas de planes de estudio y materias, editar y archivar planes, sección Materias, correlatividades guardadas en la base con sus validaciones, y quitar materias de un plan. | Bajas de cursos, guardar el régimen de la carrera y el arreglo de `useSubmit`. |
 | **E4** — Inscripciones | Materias disponibles, validación de correlativas, inscripción desde la pantalla y "Mis inscripciones" leyendo la base. | Definir el período de inscripción y ofrecer solo materias de 2.º y 3.º año. |
 
 ## Línea de tiempo
@@ -47,6 +47,7 @@ Los cuatro equipos ya tienen su trabajo integrado en `development`.
 | 13/11 | El E2 corrige la asignación automática y se integra su pase a capas (PR #11). Todo el backend cumple la regla de las cuatro capas. |
 | 13/11 | Se promueve `development` a `testing`, con todas las pruebas corridas sobre la versión integrada. |
 | 18/11 | El E1 integra el alta de usuarios con perfil, el menú según permisos, la auditoría de accesos y los arreglos de pantalla. |
+| 19/11 | Se integra el PR #12 del E3 (sección Materias, editar y archivar planes, quitar materias) y la alumna de 2.º año para el E4. |
 
 ## Integraciones
 
@@ -224,6 +225,26 @@ Los cuatro equipos ya tienen su trabajo integrado en `development`.
   - en el navegador, con respuestas simuladas: formulario de usuarios 14 de 14, menú 14 de 14 y pantalla de auditoría 25 de 25;
   - recorrido de punta a punta en el navegador, con la aplicación y la API reales: 22 de 22.
 
+### 19/11 — Sección Materias y planes del E3 (PR #12), y alumna de 2.º año para el E4
+
+- **Qué entró del E3** (PR #12, de Lorenzo y Fede):
+  - sección **Materias** en el menú: lista los planes y muestra las materias de cada uno;
+  - **editar** un plan, y **archivarlo o restaurarlo**, desde el Resumen;
+  - **ver las correlatividades** configuradas por año, y un aviso al guardarlas;
+  - **quitar una materia** de un plan, con confirmación. Si era correlativa de otra, esa correlatividad también se quita.
+- **Cómo entró:** el PR se abrió contra `production`. Se integró en `development`, igual que el #11, y GitHub lo va a seguir mostrando abierto hasta que se cierre.
+- **Ajuste del E1 al integrar:** en la sección Materias el encabezado decía "Estudiantes".
+- **Alumna de 2.º año para el E4.** `database/alumno-segundo-anio.sql` crea a Sofía Romero (`sofia@uni.edu`, `1234`, legajo L-2002) y le da por aprobadas las materias de 1.º año de los planes activos. Como no hay módulo de notas, es la única forma de tener una estudiante con materias aprobadas. Se corre después de cargar el plan, y se puede volver a correr.
+- **Verificación**, con bases nuevas:
+  - ningún controller ni service usa la base directo; frontend y backend compilan, y el lint quedó en 0 errores;
+  - pantallas nuevas del E3 en el navegador, con la aplicación y la API reales: 31 de 31;
+  - alumna de 2.º año: 14 de 14. Entra con su legajo, ve aprobadas las de 1.º, se puede inscribir en 2.º y no en 3.º, y el script se puede volver a correr sin duplicar nada;
+  - regresión de API: alta con perfil 49 de 49, auditoría 31 de 31, permisos 4 de 4, E1, E3 y E4 25 de 25, E2 25 de 26 (la esperada) y asignación automática 18 de 18. La API del E1 respondió igual en 78 pedidos;
+  - ensayo de la demo completa, con la sección Materias: 41 de 41.
+- **Observaciones para el E3:**
+  - "Editar plan" exige elegir el **régimen de la carrera**, pero la API no lo guarda. El campo arranca siempre vacío, hay que volver a elegirlo en cada edición y lo elegido se pierde. Al crear un plan pasa lo mismo. Hay que agregarlo a la base y a la API, con la Mesa Técnica, o sacarlo del formulario;
+  - según el código, si falla guardar la edición o el archivo de un plan, el cuadro se cierra igual y el error recién aparece al volver a la lista de planes.
+
 ## Decisiones tomadas
 
 | Tema | Decisión |
@@ -237,9 +258,10 @@ Los cuatro equipos ya tienen su trabajo integrado en `development`.
 | Recuperación de contraseña | Se posterga hasta que el sistema esté desplegado y haya servidor de correo. Mientras tanto, el secretario puede asignar una contraseña nueva editando al usuario. |
 | Usuarios y perfiles | El alta y la edición de usuarios crean el perfil del rol. Un estudiante se crea con su legajo (`recordNumber`), y el DNI sale del CUIL. |
 | Auditoría de accesos | Se registran los inicios de sesión, correctos y fallidos, y los accesos denegados de usuarios con sesión. No se registra el pedido sin sesión. |
+| Datos de prueba | La alumna de 2.º año se crea con un script aparte (`database/alumno-segundo-anio.sql`) y no en el script principal de la base, porque carga materias aprobadas a mano: no hay módulo de notas. |
 | Horarios de materias | Los consulta cualquier usuario con sesión (el estudiante también los necesita). Solo el Secretario los carga. |
 
-## Pendientes por equipo (al 18/11/2026)
+## Pendientes por equipo (al 19/11/2026)
 
 ### E1
 
@@ -255,12 +277,14 @@ Los cuatro equipos ya tienen su trabajo integrado en `development`.
 - Los Pull Requests van contra `development`: el #11 se abrió contra `production`.
 - Es la segunda vez que llega `Server=ALAN` en `appsettings.json`: la conexión personal va con user-secrets, como explica el README.
 - Todos los commits son de Alan: faltan los aportes del resto del equipo.
+- "Redistribuir inscripciones" también mueve de comisión a quien ya aprobó la materia (por ejemplo, Esteban en la demo, o la alumna de 2.º año): toma todas las inscripciones de la materia, sin mirar si tienen una nota final.
 
 ### E3
 
 - `useSubmit` no vuelve `isSubmitting` a `false` cuando la operación sale bien.
-- Bajas de planes y cursos.
-- El PR #12 (sección Materias, archivar y editar planes) se abrió el 18/11 contra `production` y todavía no se revisó. Los Pull Requests van contra `development`.
+- Bajas de cursos. Los planes ya se pueden archivar.
+- El régimen de la carrera se pide al crear y al editar un plan, pero no se guarda.
+- Los Pull Requests van contra `development`: el #12 se abrió contra `production`.
 
 ### E4
 
@@ -274,18 +298,18 @@ Los cuatro equipos ya tienen su trabajo integrado en `development`.
 - Aprobar formalmente la tabla `SubjectSchedules` (horarios por materia y comisión), que entró con el E2.
 - Aprobar formalmente la tabla `AccessAuditEvents` (auditoría de accesos), que entró con el E1.
 
-## Números del proyecto (al 18/11/2026)
+## Números del proyecto (al 19/11/2026)
 
-En `development` hay 132 commits sin contar los merges:
+En `development` hay 146 commits sin contar los merges:
 
 | Integrante | Equipo | Commits |
 |---|---|---|
-| Tomás González | E1 | 30 |
+| Tomás González | E1 | 33 |
 | Alan Ordóñez | E2 | 22 |
-| Lorenzo Caro | E3 | 13 |
+| Lorenzo Caro | E3 | 23 |
 | Joaquín Olmedo | E1 | 13 |
 | Agustín Coccia | E4 | 11 |
-| Federico Petta | E3 | 10 |
+| Federico Petta | E3 | 11 |
 | Damián Palacios | E1 | 7 |
 | Carlos Luque Heredia | E1 | 7 |
 | Facundo Pesa Giménez | E4 | 7 |

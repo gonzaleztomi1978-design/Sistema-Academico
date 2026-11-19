@@ -10,13 +10,13 @@ El sistema tiene dos perfiles: **Secretario** y **Estudiante**.
 
 ## Dónde estamos
 
-Actualizado al 18/11/2026. Los cuatro equipos ya tienen su trabajo integrado en `development`:
+Actualizado al 19/11/2026. Los cuatro equipos ya tienen su trabajo integrado en `development`:
 
 | Equipo | Qué ya está integrado | Qué sigue |
 |---|---|---|
 | **E1** — Acceso e Integración | Login, cierre y vencimiento de sesión con renovación automática, roles y permisos, menú según los permisos de la API, usuarios con el perfil de cada rol y auditoría de accesos. | Recuperación de contraseña, cuando el sistema esté desplegado y haya servidor de correo. |
 | **E2** — Secretaría | Inscripción a 1.º año, ver y modificar estudiantes, comisiones y cupos, docentes con sus materias y horarios por comisión, con las pantallas conectadas a la API. | Hacer el resumen de inscripciones con menos pedidos a la API. |
-| **E3** — Gestión Académica | API y pantallas de planes de estudio y materias, correlatividades guardadas en la base y quitar materias de un plan. | Bajas de planes y cursos. |
+| **E3** — Gestión Académica | API y pantallas de planes de estudio y materias, editar y archivar planes, sección Materias, correlatividades guardadas en la base y quitar materias de un plan. | Bajas de cursos y guardar el régimen de la carrera. |
 | **E4** — Inscripciones | Materias disponibles, validación de correlativas, inscripción desde la pantalla y "Mis inscripciones". | Definir el período de inscripción y ofrecer solo materias de 2.º y 3.º año. |
 
 El detalle de cada integración, cómo se probó y los pendientes de cada equipo están en la [bitácora de integración](documentos/bitacora-de-integracion.md).
@@ -232,6 +232,14 @@ Se crean solos al levantar el backend en desarrollo:
 |---|---|---|
 | Secretario | fernando@uni.edu | admin |
 | Estudiante | esteban@uni.edu | 1234 |
+
+Para probar inscripciones de 2.º año hay una alumna con las materias de 1.º año aprobadas. Esta no se crea sola: después de cargar el plan de estudio, abrí `database/alumno-segundo-anio.sql` en Management Studio y apretá **F5**.
+
+| Rol | Correo | Contraseña |
+|---|---|---|
+| Estudiante de 2.º año | sofia@uni.edu | 1234 |
+
+Si después agregás materias de 1.º año, volvé a correrlo: no duplica nada. Es solo para desarrollo.
 
 ### Si tu SQL Server tiene otro nombre
 

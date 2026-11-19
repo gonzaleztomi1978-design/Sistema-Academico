@@ -1,0 +1,52 @@
+/* Ajustes para tablet y celular de las pantallas que van dentro del layout.
+   Llevan .content adelante porque algunas pantallas cargan su hoja de estilos después de esta. */
+
+/* Tablas anchas: se deslizan dentro de su caja y no ensanchan la página. */
+.content .management-table-container {
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .content .management-table-container {
+    overflow-x: auto;
+  }
+
+  /* El buscador queda fijo mientras la tabla se desliza. */
+  .content .table-toolbar1 {
+    position: sticky;
+    left: 0;
+  }
+
+  /* Formularios de estudiante y de docente: las dos columnas pasan a una. */
+  .content .contenedor {
+    width: 100%;
+    padding: 22px 18px;
+  }
+
+  .content .contenido,
+  .content .contenido form {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .content .ladoIzq,
+  .content .ladoDer {
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  /* Encabezados de pantalla con botón: el botón baja y ocupa todo el ancho. */
+  .content .management-heading {
+    flex-wrap: wrap;
+  }
+
+  .content .welcome {
+    flex-wrap: wrap;
+  }
+
+  .content .usuarios-filtros input,
+  .content .usuarios-filtros select {
+    width: 100%;
+  }
+}

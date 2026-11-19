@@ -48,8 +48,8 @@ function CrearPlanModal({ onClose, onCreate }) {
         newErrors.añoFin = NEGATIVE_ERROR;
       } else if (!form.añoInicio) {
         newErrors.añoFin = 'Completá primero el año de inicio';
-      } else if (Number(form.añoFin) - Number(form.añoInicio) < 3) {
-        newErrors.añoFin = 'Debe ser al menos 3 años posterior al año de inicio';
+      } else if (Number(form.añoFin) - Number(form.añoInicio) < 2) {
+        newErrors.añoFin = 'Debe ser al menos 2 años posterior al año de inicio';
       }
     }
 

@@ -6,7 +6,7 @@ const MENU_POR_ROL = {
     { label: 'Planes de Estudio', path: '/secretario/planes-de-estudio', icon: 'GraduationCap', modulo: 'planes-de-estudio' },
     { label: 'Inscripciones', path: '/secretario/inscripciones', icon: 'ClipboardList', modulo: 'inscripciones' },
     { label: 'Docentes', path: '/secretario/docentes', icon: 'UserRound', modulo: 'docentes' },
-    { label: 'Materias', path: '/secretario/materias', icon: 'BookOpen', modulo: 'materias', proximamente: true },
+    { label: 'Materias', path: '/secretario/materias', icon: 'BookOpen', modulo: 'materias' },
     { label: 'Usuarios', path: '/secretario/usuarios', icon: 'Users', modulo: 'usuarios' },
     { label: 'Auditoría', path: '/secretario/auditoria', icon: 'ShieldCheck', modulo: 'auditoria' },
   ],

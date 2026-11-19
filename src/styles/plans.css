@@ -835,6 +835,304 @@
   color: var(--color-muted);
 }
 
+/* ===== Visualizar correlatividades ===== */
+.correlative-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.correlative-toolbar .year-tabs {
+  margin: 0 0 8px;
+}
+
+.correlative-view-header h2 {
+  margin-bottom: 4px;
+}
+
+.correlative-view-header .plan-materias-subtitle {
+  margin-bottom: 0;
+}
+
+.correlative-view-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.correlative-view-item {
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.correlative-view-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.correlative-view-icon {
+  color: var(--color-primary-strong);
+  flex-shrink: 0;
+}
+
+.correlative-view-info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.correlative-view-info strong {
+  font-size: 13px;
+  color: var(--color-text);
+}
+
+.correlative-view-info span {
+  font-size: 10px;
+  color: var(--color-muted);
+}
+
+.correlative-toggle {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.correlative-view-detail {
+  margin-top: 14px;
+  padding: 12px 14px 16px;
+  border-radius: var(--radius-sm);
+  background: #e3ede4;
+}
+
+.correlative-view-detail h4 {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.correlative-view-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.correlative-view-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  background: #d4e3d6;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.correlative-view-chip .correlative-number {
+  background: var(--color-primary);
+  color: var(--color-surface);
+}
+
+
+/* ===== Materias (sección) ===== */
+
+.subjects-plan-label {
+  margin: 24px 0 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text);
+  /* #183b38 */
+}
+
+.subjects-table {
+  background: var(--color-surface);
+  /* #ffffff */
+  border: 1px solid var(--color-border);
+  /* #dce5dd */
+  border-radius: var(--radius-md);
+  /* 11px */
+  padding: 8px;
+  overflow-x: auto;
+}
+
+.subjects-table-row {
+  display: grid;
+  grid-template-columns: 80px 120px minmax(200px, 1fr) 50px 120px 150px 120px;
+  align-items: center;
+  gap: 8px;
+  min-width: 780px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border);
+  /* #dce5dd */
+  font-size: 11px;
+  color: var(--color-text);
+  /* #183b38 */
+  text-align: center;
+}
+
+.subjects-table-row:last-child {
+  border-bottom: none;
+}
+
+.subjects-table-head {
+  background: #e3ede4;
+  border-radius: var(--radius-sm);
+  /* 7px */
+  font-size: 10px;
+  font-weight: 600;
+}
+
+
+/* ===== Notificación (toast) ===== */
+.plan-toast {
+  position: fixed;
+  top: 72px;
+  right: 32px;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 340px;
+  max-width: calc(100vw - 32px);
+  padding: 14px 16px;
+  border: 1px solid #b7cfbb;
+  border-radius: var(--radius-md);
+  /* 11px */
+  background: #d4e3d6;
+  color: var(--color-primary-strong);
+  /* #1f4c48 */
+  box-shadow: var(--shadow-card);
+}
+
+.plan-toast-icon {
+  flex-shrink: 0;
+  color: var(--color-primary);
+  /* #3f746b */
+}
+
+.plan-toast-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.plan-toast-text strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary-strong);
+  /* #1f4c48 */
+}
+
+.plan-toast-text span {
+  font-size: 10px;
+  color: var(--color-muted);
+  /* #6e827c */
+}
+
+.plan-toast-close {
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-primary-strong);
+  /* #1f4c48 */
+  cursor: pointer;
+}
+
+.plan-toast-close:hover {
+  opacity: 0.7;
+}
+
+
+/* ===== Modal: Archivar / Restaurar plan ===== */
+.archive-plan-modal {
+  max-width: 420px;
+}
+
+.archive-plan-body {
+  padding: 32px 32px 24px;
+  text-align: center;
+}
+
+.archive-plan-icon {
+  display: block;
+  margin: 0 auto 16px;
+  color: #d4180f;
+}
+
+.archive-plan-icon.is-restore {
+  color: var(--color-primary);
+  /* #3f746b */
+}
+
+.archive-plan-body h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+  /* #183b38 */
+}
+
+.archive-plan-body p {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--color-muted);
+  /* #6e827c */
+}
+
+.archive-plan-body .field-error {
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: #c0392b;
+}
+
+.archive-plan-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.archive-plan-danger {
+  padding: 10px 22px;
+  border: none;
+  border-radius: var(--radius-sm);
+  /* 7px */
+  background: #d4180f;
+  color: var(--color-surface);
+  /* #ffffff */
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.archive-plan-danger:hover {
+  background: #b5130c;
+}
+
+.archive-plan-danger:disabled,
+.archive-plan-actions .modal-submit-button:disabled,
+.archive-plan-actions .modal-cancel-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 800px) {
   .plans-grid {

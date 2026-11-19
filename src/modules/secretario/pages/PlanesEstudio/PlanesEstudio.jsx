@@ -46,8 +46,27 @@ function PlanesEstudio() {
     }
   };
 
+  const updatePlan = async (planId, changes) => {
+    const plan = planes.find((currentPlan) => currentPlan.id === planId);
+    if (!plan) return;
+    try {
+      // el PUT reemplaza todos los campos: se manda el plan completo con los cambios aplicados
+      const updatedPlan = await plansApi.actualizarPlan(planId, { ...plan, ...changes });
+      setPlanes((currentPlans) => currentPlans.map((currentPlan) => (currentPlan.id === planId ? updatedPlan : currentPlan)));
+      setNotice('Se actualizó el plan correctamente.');
+    } catch (error) {
+      setNotice(`No se pudo actualizar el plan: ${error.message}`);
+    }
+  };
+
   if (selectedPlan) {
-    return <PlanDetalle plan={selectedPlan} onBack={() => setSelectedPlanId(null)} />;
+    return (
+      <PlanDetalle
+        plan={selectedPlan}
+        onBack={() => setSelectedPlanId(null)}
+        onUpdatePlan={updatePlan}
+      />
+    );
   }
 
   const renderSection = (title, plans) => (

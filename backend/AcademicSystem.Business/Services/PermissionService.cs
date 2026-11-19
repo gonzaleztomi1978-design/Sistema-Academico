@@ -14,6 +14,7 @@ public class PermissionService : IPermissionService
             ["inicio"] = ["ver"],
             ["planes-de-estudio"] = ["ver", "crear", "editar", "baja", "restaurar"],
             ["docentes"] = ["ver", "crear", "editar"],
+            ["materias"] = ["ver"],
             ["inscripciones"] = ["ver"],
             ["usuarios"] = ["ver", "crear", "editar", "baja"],
             ["auditoria"] = ["ver"]
